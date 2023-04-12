@@ -39,7 +39,7 @@
   display: flex;
   justify-content: space-between;
   font-size: 14px;
-  line-height: 100%;
+  line-height: 1;
   padding-bottom: 7px;
   border-bottom: 1px solid #bfbdb2;
   margin-bottom: 24px;
@@ -53,28 +53,30 @@
   text-transform: uppercase;
 }
 
+.price__item-count {
+  white-space: nowrap;
+}
+
 @media (max-width: 768px) {
   .price {
     padding: 40px 0;
   }
 
   .price__title {
+    font-size: 32px;
+    margin-bottom: 16px;
   }
-  .price__tagline {
+
+  .price__wrapper-content::before {
+    content: none;
   }
-  .price__wrapper-content {
-  }
+
   .price__content {
+    flex-basis: 100%;
   }
+
   .price__list {
-  }
-  .price__item {
-  }
-  .price__item-title {
-  }
-  .price__item-count {
-  }
-  .price__link {
+    margin-bottom: 40px;
   }
 }
 
@@ -84,21 +86,23 @@
   }
 
   .price__title {
+    font-size: 20px;
+    margin-bottom: 8px;
   }
+
   .price__tagline {
+    font-size: 12px;
+    margin-bottom: 24px;
   }
-  .price__wrapper-content {
-  }
-  .price__content {
-  }
+
   .price__list {
+    margin-bottom: 24px;
   }
+
   .price__item {
-  }
-  .price__item-title {
-  }
-  .price__item-count {
-  }
-  .price__link {
+    font-size: 12px;
+    line-height: 1.2;
+    padding-bottom: 6px;
+    margin-bottom: 16px;
   }
 }
