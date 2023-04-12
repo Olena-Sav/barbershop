@@ -82,27 +82,24 @@
     width: 40px;
     bottom: 32%;
   }
-  .slider__arrow_left {
-  }
-  .slider__arrow_right {
-  }
 }
 
 @media (max-width: 560px) {
   .slider {
+    padding-bottom: 20px;
   }
-  .slider__container {
-  }
-  .slider__list {
-  }
+
   .slider__item {
+    max-width: 100%;
   }
-  .slider__img {
-  }
+
   .slider__arrow {
+    bottom: 0;
   }
   .slider__arrow_left {
+    left: 0;
   }
   .slider__arrow_right {
+    right: 0;
   }
 }
