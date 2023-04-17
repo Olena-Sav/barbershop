@@ -26,4 +26,8 @@
 }
 
 .radio__label_spec {
+  padding-left: 52px;
+  background-image: var(--bg-image);
+  background-size: 36px;
+  background-position: 8px;
 }
