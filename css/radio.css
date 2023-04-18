@@ -44,3 +44,9 @@
     background-size: 24px;
   }
 }
+
+@media (max-width: 560px) {
+  .radio__label_spec {
+    background-position: 4px;
+  }
+}
