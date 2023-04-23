@@ -21,15 +21,16 @@
   padding: 0;
   list-style: none;
   display: grid;
-  grid-template-columns: repeat(auto-fit, 384px);
-  gap: 24px 32px;
+  grid-template-columns: repeat(auto-fill, minmax(384px, 1fr));
+  gap: 24px;
 }
 
 .about__item {
-  padding: 6px 6px 6px 96px;
+  padding: 6px 0px 6px 96px;
   background-position: left;
   background-repeat: no-repeat;
   background-size: 80px;
+  min-height: 80px;
 }
 
 .about__item_top {
@@ -57,27 +58,19 @@
   line-height: 130%;
 }
 
-@media (max-width: 1310px) {
-  .about__list {
-    grid-template-columns: repeat(auto-fit, 320px);
-    gap: 24px 29px;
-  }
-}
-
 @media (max-width: 1024px) {
-  .about__item {
-    background-position: top;
-    padding: 96px 0 0 0;
-  }
-
   .about__description {
-    margin: 0 0 46px;
+    margin-bottom: 46px;
   }
 
   .about__list {
-    grid-template-columns: repeat(auto-fit, 290px);
+    grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+  }
 
-    gap: 24px 29px;
+  .about__item {
+    padding-top: 96px;
+    background-position: top left;
+    padding-left: 0;
   }
 }
 
@@ -86,46 +79,26 @@
     padding: 40px 0;
   }
 
-  .about__item {
-    padding: 6px 6px 6px 96px;
-    background-position: left;
-  }
   .about__title {
     font-size: 32px;
-    max-width: 672px;
   }
 
   .about__description {
-    line-height: 150%;
-    max-width: 672px;
-    margin: 0 0 32px;
+    margin-bottom: 32px;
   }
 
   .about__list {
-    list-style: none;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, 320px);
-    gap: 24px 32px;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
   }
 
   .about__item {
-    padding: 6px 6px 6px 96px;
+    padding-left: 96px;
+    padding-top: 0;
     background-position: left;
-    background-repeat: no-repeat;
-    background-size: 80px;
   }
 
   .about__item-title {
-    margin: 0 0 8px;
-    font-weight: 400;
     font-size: 16px;
-    line-height: 120%;
-    text-transform: uppercase;
-  }
-
-  .about__item-description {
-    margin: 0;
-    line-height: 130%;
   }
 }
 
@@ -134,45 +107,21 @@
     padding: 32px 0;
   }
 
+  .about__list {
+    grid-template-columns: minmax(272px, 1fr);
+  }
+
   .about__title {
     font-size: 20px;
-    max-width: 272px;
-    margin: 0 0 16px;
+    margin-bottom: 16px;
   }
 
   .about__description {
-    line-height: 150%;
-
-    margin: 0 0 32px;
-  }
-
-  .about__list {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, 272px);
-    gap: 24px 32px;
-  }
-
-  .about__item {
-    padding: 6px 6px 6px 72px;
-    background-position: left;
-    background-repeat: no-repeat;
-    background-size: 64px;
-  }
-
-  .about__item-title {
-    margin: 0 0 8px;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 120%;
-    text-transform: uppercase;
-  }
-
-  .about__item-description {
-    margin: 0;
-    line-height: 130%;
     font-size: 12px;
+  }
+  .about__item {
+    padding-left: 72px;
+    min-height: 64px;
+    background-size: 64px;
   }
 }

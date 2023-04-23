@@ -1,5 +1,6 @@
 .preload {
   position: relative;
+  min-height: 100px;
 }
 
 .preload::after {
@@ -18,5 +19,5 @@
 @keyframes rotate {
   to {
     transform: rotate(360deg);
-  }ddd
+  }
 }
