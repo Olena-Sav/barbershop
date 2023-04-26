@@ -47,7 +47,6 @@
 .reserve__fieldset_sub {
   flex-basis: 100%;
   margin-bottom: 24px;
-  font-feature-settings: "pnum" on, "lnum" on;
 }
 
 .reserve__fieldset:last-child {
@@ -64,14 +63,14 @@
   }
 
   .reserve__list {
-    margin: 0 0 40px;
+    margin-bottom: 40px;
   }
 
   .reserve__form-container {
     margin-bottom: 32px;
   }
   .reserve__fieldset {
-    margin: 0 0 40px;
+    margin-bottom: 40px;
   }
 
   .reserve__legend {
@@ -91,28 +90,22 @@
 
   .reserve__title {
     font-size: 20px;
-    margin-bottom: 24px;
+    margin-bottom: 16px;
   }
 
   .reserve__list {
     padding-left: 18px;
-    margin: 0 0 32px;
+    margin-bottom: 32px;
+    font-size: 12px;
+    line-height: 120%;
   }
 
   .reserve__form-container {
     margin-bottom: 24px;
   }
+
   .reserve__fieldset {
-    margin: 0 0 32px;
+    margin-bottom: 32px;
     gap: 4px;
-  }
-
-  .reserve__legend {
-    margin-bottom: 16px;
-    font-size: 22px;
-  }
-
-  .reserve__fieldset_sub {
-    margin-bottom: 20px;
   }
 }
