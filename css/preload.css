@@ -6,8 +6,8 @@
 .preload::after {
   content: "";
   position: absolute;
-  width: 56px;
-  height: 56px;
+  width: 26px;
+  height: 26px;
   top: calc(50% - 28px);
   left: calc(50% - 28px);
   border: 11px double #f6f3e3;
