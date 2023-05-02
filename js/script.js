@@ -112,11 +112,33 @@ const renderPrice = (wrapper, data) => {
   });
 };
 
+const renderService = (wrapper, data) => {
+  const labels = data.map((item) => {
+    const label = document.createElement("label");
+    label.classList.add("radio");
+    label.innerHTML = `
+      <input class="radio__input" type="radio" name="service" value="${item.id}" />
+      <span class="radio__label">${item.name}</span> 
+    `;
+    return label;
+  });
+
+  console.log(labels);
+  console.log(...labels);
+  wrapper.append(...labels);
+};
+
 const initService = () => {
   const priceList = document.querySelector(".price__list");
+  const reserveFieldsetService = document.querySelector(
+    ".reserve__fieldset_service"
+  );
   priceList.textContent = "";
-
   addPreload(priceList);
+
+  reserveFieldsetService.innerHTML =
+    '<legend class="reserve__legend">Услуга</legend>';
+  addPreload(reserveFieldsetService);
 
   fetch(API_URL)
     .then((response) => response.json())
@@ -124,15 +146,39 @@ const initService = () => {
       renderPrice(priceList, data);
       removePreload(priceList);
       return data;
-    });
-    .then(data => {
-      renderService()
     })
+    .then((data) => {
+      renderService(reserveFieldsetService, data);
+      removePreload(reserveFieldsetService);
+    });
+};
+
+const addDisabled = (arr) => {
+  arr.forEach((elem) => {
+    elem.disabled = true;
+  });
+};
+
+const removeDisabled = (arr) => {
+  arr.forEach((elem) => {
+    elem.disabled = false;
+  });
+};
+
+const initReserve = () => {
+  const reserveForm = document.querySelector(".reserve__form");
+  const { fieldspec, fielddata, fieldmonth, fieldday, fieldtime, btn } =
+    reserveForm;
+
+  addDisabled([fieldspec, fielddata, fieldmonth, fieldday, fieldtime, btn]);
+
+  reserveForm.addEventListener("change", (event) => {});
 };
 
 const init = () => {
   initSlider();
   initService();
+  initReserve();
 };
 
 window.addEventListener("DOMContentLoaded", init);
