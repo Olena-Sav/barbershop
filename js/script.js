@@ -1,4 +1,4 @@
-const API_URL = "https://sudden-seemly-narwhal.glitch.me/api";
+const API_URL = "https://sudden-seemly-narwhal.glitch.me/";
 
 /*
 GET /api - получить список услуг
@@ -123,8 +123,6 @@ const renderService = (wrapper, data) => {
     return label;
   });
 
-  console.log(labels);
-  console.log(...labels);
   wrapper.append(...labels);
 };
 
@@ -140,7 +138,7 @@ const initService = () => {
     '<legend class="reserve__legend">Услуга</legend>';
   addPreload(reserveFieldsetService);
 
-  fetch(API_URL)
+  fetch(`${API_URL}/api`)
     .then((response) => response.json())
     .then((data) => {
       renderPrice(priceList, data);
@@ -165,6 +163,59 @@ const removeDisabled = (arr) => {
   });
 };
 
+const renderSpec = (wrapper, data) => {
+  const labels = data.map((item) => {
+    const label = document.createElement("label");
+    label.classList.add("radio");
+    label.innerHTML = `
+    <input class="radio__input" type="radio" name="spec" value='${item.id}' />
+    <span
+      class="radio__label radio__label_spec"
+      style="--bg-image: url(${API_URL}${item.img})"
+      >${item.name}</span
+    >
+    `;
+    return label;
+  });
+
+  wrapper.append(...labels);
+};
+
+const renderMonth = (wrapper, data) => {
+  const labels = data.map((month) => {
+    const label = document.createElement("label");
+    label.classList.add("radio");
+    label.innerHTML = `
+    <input class="radio__input" type="radio" name="month" value='${month}' />
+    <span
+      class="radio__label">${new Intl.DateTimeFormat("ru-RU", {
+        month: "long",
+      }).format(new Date(month))}</span>
+    `;
+    return label;
+  });
+
+  wrapper.append(...labels);
+};
+
+const renderDay = (wrapper, data, month) => {
+  const labels = data.map((day) => {
+    const label = document.createElement("label");
+    label.classList.add("radio");
+    label.innerHTML = `
+    <input class="radio__input" type="radio" name="day" value='${day}' />
+    <span
+      class="radio__label">${new Intl.DateTimeFormat("ru-RU", {
+        month: "long",
+        day: "numeric",
+      }).format(new Date(`${month}/${day}`))}</span>
+    `;
+    return label;
+  });
+
+  wrapper.append(...labels);
+};
+
 const initReserve = () => {
   const reserveForm = document.querySelector(".reserve__form");
   const { fieldspec, fielddata, fieldmonth, fieldday, fieldtime, btn } =
@@ -172,7 +223,45 @@ const initReserve = () => {
 
   addDisabled([fieldspec, fielddata, fieldmonth, fieldday, fieldtime, btn]);
 
-  reserveForm.addEventListener("change", (event) => {});
+  reserveForm.addEventListener("change", async (event) => {
+    const target = event.target;
+
+    if (target.name === "service") {
+      addDisabled([fieldspec, fielddata, fieldmonth, fieldday, fieldtime, btn]);
+      fieldspec.innerHTML =
+        '<legend class="reserve__legend">Специалист</legend>';
+      addPreload(fieldspec);
+      const response = await fetch(`${API_URL}/api?service=${target.value}`);
+      const data = await response.json();
+      renderSpec(fieldspec, data);
+      removePreload(fieldspec);
+      removeDisabled([fieldspec]);
+    }
+
+    if (target.name === "spec") {
+      addDisabled([fielddata, fieldmonth, fieldday, fieldtime, btn]);
+      addPreload(fieldmonth);
+      const response = await fetch(`${API_URL}/api?spec=${target.value}`);
+      const data = await response.json();
+      fieldmonth.textContent = "";
+      renderMonth(fieldmonth, data);
+      removePreload(fieldmonth);
+      removeDisabled([fielddata, fieldmonth]);
+    }
+
+    if (target.name === "month") {
+      addDisabled([fieldday, fieldtime, btn]);
+      addPreload(fieldday);
+      const response = await fetch(
+        `${API_URL}/api?spec=${reserveForm.spec.value}&month=${reserveForm.month.value}`
+      );
+      const data = await response.json();
+      fieldday.textContent = "";
+      renderDay(fieldday, data, reserveForm.month.value);
+      removePreload(fieldday);
+      removeDisabled([fieldday]);
+    }
+  });
 };
 
 const init = () => {
