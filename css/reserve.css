@@ -2,6 +2,15 @@
   padding: 62px 0 124px;
 }
 
+
+.reserve__form > p {
+display: block;
+margin: 30px 30%;
+  font-size: 21px;
+  text-align: center;
+  line-height: 40px;
+}
+
 .reserve__title {
   font-weight: 400;
   font-size: 40px;

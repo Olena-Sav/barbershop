@@ -34,6 +34,7 @@
   padding-left: 52px;
 }
 
+
 .radio__label_spec::before {
   content: "";
   position: absolute;
