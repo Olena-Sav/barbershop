@@ -1,4 +1,4 @@
-const API_URL = "https://sudden-seemly-narwhal.glitch.me/";
+const API_URL = "https://ninth-scratched-cake.glitch.me";
 
 /*
 GET /api - получить список услуг
@@ -105,7 +105,7 @@ const renderPrice = (wrapper, data) => {
 
     priceItem.innerHTML = `
       <span class="price__item-title">${item.name}</span>
-      <span class="price__item-count">${item.price} руб</span>
+      <span class="price__item-count">${item.price}  &#8364</span>
     `;
 
     wrapper.append(priceItem);
@@ -135,7 +135,7 @@ const initService = () => {
   addPreload(priceList);
 
   reserveFieldsetService.innerHTML =
-    '<legend class="reserve__legend">Услуга</legend>';
+    '<legend class="reserve__legend">Service</legend>';
   addPreload(reserveFieldsetService);
 
   fetch(`${API_URL}/api`)
@@ -171,7 +171,7 @@ const renderSpec = (wrapper, data) => {
     <input class="radio__input" type="radio" name="spec" value='${item.id}' />
     <span
       class="radio__label radio__label_spec"
-      style="--bg-image: url(${API_URL}${item.img})"
+      style="--bg-image: url(${API_URL}/${item.img})"
       >${item.name}</span
     >
     `;
@@ -181,6 +181,9 @@ const renderSpec = (wrapper, data) => {
   wrapper.append(...labels);
 };
 
+
+
+
 const renderMonth = (wrapper, data) => {
   const labels = data.map((month) => {
     const label = document.createElement("label");
@@ -188,7 +191,7 @@ const renderMonth = (wrapper, data) => {
     label.innerHTML = `
     <input class="radio__input" type="radio" name="month" value='${month}' />
     <span
-      class="radio__label">${new Intl.DateTimeFormat("ru-RU", {
+      class="radio__label">${new Intl.DateTimeFormat("de-DE", {
         month: "long",
       }).format(new Date(month))}</span>
     `;
@@ -205,7 +208,7 @@ const renderDay = (wrapper, data, month) => {
     label.innerHTML = `
     <input class="radio__input" type="radio" name="day" value='${day}' />
     <span
-      class="radio__label">${new Intl.DateTimeFormat("ru-RU", {
+      class="radio__label">${new Intl.DateTimeFormat("de-DE", {
         month: "long",
         day: "numeric",
       }).format(new Date(`${month}/${day}`))}</span>
@@ -247,11 +250,12 @@ const initReserve = () => {
 
   reserveForm.addEventListener("change", async (event) => {
     const target = event.target;
+    
 
     if (target.name === "service") {
       addDisabled([fieldspec, fielddata, fieldmonth, fieldday, fieldtime, btn]);
       fieldspec.innerHTML =
-        '<legend class="reserve__legend">Специалист</legend>';
+        '<legend class="reserve__legend">Spezialist</legend>';
       addPreload(fieldspec);
       const response = await fetch(`${API_URL}/api?service=${target.value}`);
       const data = await response.json();
@@ -303,12 +307,13 @@ const initReserve = () => {
   });
 
   reserveForm.addEventListener("submit", async (e) => {
-    e.preventDefault();
+    e.preventDefault(); 
 
     const formData = new FormData(reserveForm);
+    console.log(Object.fromEntries);
     const json = JSON.stringify(Object.fromEntries(formData));
 
-    const response = await fetch(`${API_URL}api/order`, {
+    const response = await fetch(`${API_URL}/api/order`, {
       method: "post",
       body: json,
     });
@@ -327,12 +332,12 @@ const initReserve = () => {
 
     const p = document.createElement("p");
     p.innerHTML = `
-    Спасибо за бронь #${data.id}! <br>  
-    Ждем Вас ${new Intl.DateTimeFormat("ru-RU", {
+    Vielen Dank für die Buchung #${data.id}! <br>  
+    Wir freuen uns auf Ihren Besuch ${new Intl.DateTimeFormat("de-DE", {
       month: "long",
       day: "numeric",
     }).format(new Date(`${data.month}/${data.day}`))},
-    время ${data.time}
+    <br> Zeit ${data.time}
     `;
 
     reserveForm.append(p);
@@ -343,6 +348,6 @@ const init = () => {
   initSlider();
   initService();
   initReserve();
-};
+};   
 
 window.addEventListener("DOMContentLoaded", init);
